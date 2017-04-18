@@ -105,8 +105,8 @@
 
 		<!-- xml解析依赖 -->
 		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.dom4j.dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
 		<dependency>
