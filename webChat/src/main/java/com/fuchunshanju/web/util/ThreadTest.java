@@ -17,7 +17,11 @@ public class ThreadTest implements Runnable {
 		new Thread(test).start();
 		new Thread(test).start();
 		new Thread(test).start();
+		Integer a = 100;
+		Integer b = 100;
+		System.out.println(a==b);
 	}
+	
 }
 
 
