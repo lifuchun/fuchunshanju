@@ -14,6 +14,13 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.fuchunshanju.webchat.message.resp.Article;
+import com.fuchunshanju.webchat.message.resp.ImageMessage;
+import com.fuchunshanju.webchat.message.resp.MusicMessage;
+import com.fuchunshanju.webchat.message.resp.NewsMessage;
+import com.fuchunshanju.webchat.message.resp.TextMessage;
+import com.fuchunshanju.webchat.message.resp.VideoMessage;
+import com.fuchunshanju.webchat.message.resp.VoiceMessage;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -76,6 +83,10 @@ public class MessageUtil {
      */  
     public static final String REQ_MESSAGE_TYPE_EVENT = "event";  
 
+    /**
+     * 请求消息类型：小视频
+     */
+    public static final String REQ_MESSAGE_TYPE_VIDEO = "video";
     /** 
      * 事件类型：subscribe(订阅) 
      */  
@@ -92,6 +103,21 @@ public class MessageUtil {
     public static final String EVENT_TYPE_CLICK = "CLICK";  
     
     /**
+     * 事件类型：SCAN(扫描二维码)
+     */
+    public static final String EVENT_TYPE_SCAN= "SCAN";
+    
+    /**
+     * 事件类型：LOCATION(位置上报)
+     */
+    public  static final String EVENT_TYPE_LOCATION="LOCATION";
+    
+    /**
+     * 事件类型：VIEW(自定义菜单 View 事件)
+     */
+    public static final String EVENT_TYPE_VIEW="VIEW";
+    
+    /**
      * 
     * @Title: parseXml 
     * @Description: 解析微信的xml 
@@ -101,6 +127,7 @@ public class MessageUtil {
     * @return Map<String,String>    返回类型 
     * @throws
      */
+    @SuppressWarnings("unchecked")
     public static Map<String, String> parseXml(HttpServletRequest request) throws IOException{
     	Map<String, String> map = new HashMap<String, String>();
     	//从请求获取流
@@ -124,7 +151,75 @@ public class MessageUtil {
 		return map;
     }
     
-    @SuppressWarnings("unused")
+    /**
+     * @Description: 文本消息对象转换成 xml
+     * @param @param textMessage
+     * @param @return
+     * @author Lee
+     */
+    public static String textMessageToXml(TextMessage textMessage) {
+        xstream.alias("xml", textMessage.getClass());
+        return xstream.toXML(textMessage);
+    }
+
+    /**
+     * @Description: 图文消息对象转换成 xml
+     * @param @param newsMessage
+     * @param @return
+     * @author Lee
+     */
+    public static String newsMessageToXml(NewsMessage newsMessage) {
+        xstream.alias("xml", newsMessage.getClass());
+        xstream.alias("item", new Article().getClass());
+        return xstream.toXML(newsMessage);
+    }
+
+    /**
+     * @Description: 图片消息对象转换成 xml
+     * @param @param imageMessage
+     * @param @return
+     * @author Lee
+     */
+    public static String imageMessageToXml(ImageMessage imageMessage) {
+        xstream.alias("xml", imageMessage.getClass());
+        return xstream.toXML(imageMessage);
+    }
+
+    /**
+     * @Description: 语音消息对象转换成 xml
+     * @param @param voiceMessage
+     * @param @return
+     * @author Lee
+     */
+    public static String voiceMessageToXml(VoiceMessage voiceMessage) {
+        xstream.alias("xml", voiceMessage.getClass());
+        return xstream.toXML(voiceMessage);
+    }
+
+    /**
+     * @Description: 视频消息对象转换成 xml
+     * @param @param videoMessage
+     * @param @return
+     * @author Lee
+     */
+    public static String videoMessageToXml(VideoMessage videoMessage) {
+        xstream.alias("xml", videoMessage.getClass());
+        return xstream.toXML(videoMessage);
+    }
+
+    /**
+     * @Description: 音乐消息对象转换成 xml
+     * @param @param musicMessage
+     * @param @return
+     * @author Lee
+     */
+    public static String musicMessageToXml(MusicMessage musicMessage) {
+        xstream.alias("xml", musicMessage.getClass());
+        return xstream.toXML(musicMessage);
+    }
+
+    
+    @SuppressWarnings("unchecked")
     private static XStream xstream = new XStream(new XppDriver() {  
         public HierarchicalStreamWriter createWriter(Writer out) {  
             return new PrettyPrintWriter(out) {  
