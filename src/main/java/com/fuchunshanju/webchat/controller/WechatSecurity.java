@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,11 @@ import com.fuchunshanju.webchat.dispatcher.MsgDispatcher;
 import com.fuchunshanju.webchat.util.MessageUtil;
 import com.fuchunshanju.webchat.util.SignUtil;
 
+
+@Controller
+@RequestMapping("/wechat")
 public class WechatSecurity {
+
 	 private static Logger logger = Logger.getLogger(WechatSecurity.class);
 
 	    /**
@@ -29,7 +34,7 @@ public class WechatSecurity {
 	     * @param @param nonce
 	     * @param @param echostr
 	     */
-	    @RequestMapping(value = "security", method = RequestMethod.GET)
+	    @RequestMapping(value = "/security", method = RequestMethod.GET)
 	    public void doGet(
 	            HttpServletRequest request,
 	            HttpServletResponse response,

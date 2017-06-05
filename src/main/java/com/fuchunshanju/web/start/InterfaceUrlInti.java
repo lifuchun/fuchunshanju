@@ -1,4 +1,6 @@
-package com.fuchunshanju.web.util;
+package com.fuchunshanju.web.start;
+
+import com.fuchunshanju.web.util.GlobalConstants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +9,7 @@ import java.util.Properties;
 /**
  * 
 * @ClassName: InterfaceUrlInti 
-* @Description: TODO(配置读取) 
+* @Description: (配置读取)
 * @author Lee 
 * @date 2017年4月21日 上午11:58:50 
 *

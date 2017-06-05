@@ -1,4 +1,4 @@
-package com.fuchunshanju.web.util;
+package com.fuchunshanju.web.start;
 
 import com.fuchunshanju.web.start.InterfaceUrlInti;
 
